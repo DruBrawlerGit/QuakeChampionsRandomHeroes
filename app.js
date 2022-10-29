@@ -66,6 +66,15 @@ function adddelAnimationSelect(nodein, selONF) {
       '4px 3px 0px #7A7A7A, 0px 9px 15px rgba(16,0,206,0.77);'
   } else {
     findIdCard.querySelector('.imgChamp').style.opacity = '0.7'
+    ///Тут доработать функцию возвращения hover
+    // var opacityReturn = findIdCard.querySelector('.imgChamp')
+    // opacityReturn.addEventListener('mouseover', function () {
+    //   opacityReturn.style.opacity = 1
+    // })
+    // opacityReturn.addEventListener('mouesout', function () {
+    //   opacityReturn.style.opacity = 0.7
+    // })
+
     findIdCard.querySelector('.championName').style.color = 'crimson'
     findIdCard.querySelector('.championName').style.textShadow = ''
   }
