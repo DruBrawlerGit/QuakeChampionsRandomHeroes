@@ -28,7 +28,7 @@ document.addEventListener('keydown', (event) => {
   event.preventDefault()
   if (event.code.toLowerCase() === 'space') {
     //Если нажали проблел то сбросить цвета
-    setRandomsChampions() //вызываем функцию замены цвета
+    setRandomsChampions() //вызываем функцию замены чемпиона
   }
   // console.log(event.code)
 })
@@ -51,7 +51,11 @@ document.addEventListener('keydown', (event) => {
 
 //Функция генерации № чемпиона
 function generateRndChampion() {
-  return Math.floor(Math.random() * dataChampions.length)
+  let rndvalue = Math.floor(Math.random() * dataChampions.length)
+  if (currentChamps.includes(rndvalue)) {
+    rndvalue = generateRndChampion() //С помощью рекурсии добиваемся работы без повторов
+  }
+  return rndvalue
 }
 
 //Установка сгенерированных чемпионов
@@ -77,16 +81,9 @@ function setRandomsChampions() {
     }
 
     const championId = generateRndChampion() //генерируем № чемпиона
-    //если в существующем на экране списке героев уже существует этот персонаж то рекурсия
-    if (currentChamps.includes(championId) == false) {
-      currentChamps[index] = championId
-      console.log('Нет повтора')
-    } else {
-      //Рекурсия
-      console.log('повтор')
-    }
-    ///.indexOf
+
     //Кудато нужно вписать id
+    currentChamps[index] = championId
     lable.textContent = dataChampions[championId][1] //вписываем в лейбл  championName
     champImage.children[0].src = dataChampions[championId][2]
 
