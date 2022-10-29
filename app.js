@@ -34,20 +34,44 @@ document.addEventListener('keydown', (event) => {
 })
 
 //Блокировка персожана
-//По клику нужно убрать опасити. добавить ID в setChamps в соотвествующий []
-// document.addEventListener('click', (event) => {
-//   const type = event.target.dataset.type //Свойство опускаем в нижний регистр (тк оно всегда в верхнем)
-//   if (type === 'lock') {
-//     //Если кликнули по блоку картинки
-//     // const node =
-//     //   event.target.tagName.toLowerCase() === 'i' //Если кликнули по символу замка то
-//     //     ? event.target //
-//     //     : event.target.children[0] //а если по фону замка то,то получаем первого ребенка из массива (сам символ значка)
+//По клику нужно убрать прозрачность. добавить ID в setChamps в соотвествующий []
+document.addEventListener('click', (event) => {
+  if (event.target.parentNode.className == 'imgChamp') {
+    selectClickedChampion(event.target.parentNode.parentNode.id) //Шелкнули прямо на картинку
+  } else if (event.target.parentNode.className == 'champion_card') {
+    selectClickedChampion(event.target.parentNode.id) //Шелкнули на поле карточки
+  }
+})
 
-//     // node.classList.toggle('fa-lock-open') //переключить замок (смену класса)
-//     // node.classList.toggle('fa-lock')
-//   }
-// })
+//Функция выбора героя по id карточки
+function selectClickedChampion(nodeId) {
+  let iD = nodeId.replace('card_', '') //обрезаем класс
+  if (setChamps[iD] === -1) {
+    setChamps[iD] = currentChamps[iD] //по классу 0 1 2 присваиваем выбор героя
+    adddelAnimationSelect(nodeId, true)
+  } else {
+    setChamps[iD] = -1
+    adddelAnimationSelect(nodeId, false)
+  }
+}
+
+//Функция анимирования выбора чемпиона
+function adddelAnimationSelect(nodein, selONF) {
+  // Надо найти элемент в дом дереве с таким классом
+  const findIdCard = document.querySelector('#' + nodein) //найти чилдрен  imgChamp и изменить ему прозрачность
+  if (selONF == true) {
+    findIdCard.querySelector('.imgChamp').style.opacity = '1'
+    findIdCard.querySelector('.championName').style.color = 'blue'
+    findIdCard.querySelector('.championName').style.textShadow =
+      '4px 3px 0px #7A7A7A, 0px 9px 15px rgba(16,0,206,0.77);'
+  } else {
+    findIdCard.querySelector('.imgChamp').style.opacity = '0.7'
+    findIdCard.querySelector('.championName').style.color = 'crimson'
+    findIdCard.querySelector('.championName').style.textShadow = ''
+  }
+
+  //championName сменить цвет и придать анимацию выбора взрыв или типа того
+}
 
 //Функция генерации № чемпиона
 function generateRndChampion() {
@@ -69,9 +93,6 @@ function setRandomsChampions() {
   })
 
   colums.forEach((col, index) => {
-    // console.log(col)
-    // console.log(index)
-    //const isLocked = col.querySelector('i').classList.contains('fa-lock') //Проверка класса заблокирован или нет
     const lable = col.querySelector('.championName') // Находим место под имя
     const champImage = col.querySelector('.imgChamp')
 
@@ -82,38 +103,10 @@ function setRandomsChampions() {
 
     const championId = generateRndChampion() //генерируем № чемпиона
 
-    //Кудато нужно вписать id
-    currentChamps[index] = championId
+    currentChamps[index] = championId //Вписываем id
     lable.textContent = dataChampions[championId][1] //вписываем в лейбл  championName
     champImage.children[0].src = dataChampions[championId][2]
-
-    // if (isLocked) {
-    //   //Если заблокирован то не менять
-    //   colors.push(lable.textContent)
-    //   return
-    // }
-
-    //console.log(image)
-
-    // const color = isInitial
-    //   ? colors[index]
-    //     ? colors[index] //Проверка пустого массива
-    //     : chroma.random() //то
-    //   : chroma.random() //генерируем цвет с помощью доп библиотеки
-
-    // if (!isInitial) {
-    //   colors.push(color)
-    // }
-
-    // lable.textContent = 'Text' + index //вписываем в лейб  championName
-    // champImage.children[0].src = '/images/STROGG_CUTOUT.png'
-
-    //champImage.src = '/images/STROGG_CUTOUT.png' //вписываем путь к картинке
-    //console.log(image)
-    //col.style.background = color //делаем цвет фона
   })
-
-  //updateColorsHash(colors)
 }
 
 /*
