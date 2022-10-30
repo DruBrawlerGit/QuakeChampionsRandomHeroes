@@ -30,7 +30,6 @@ document.addEventListener('keydown', (event) => {
     //Если нажали проблел то сбросить цвета
     setRandomsChampions() //вызываем функцию замены чемпиона
   }
-  // console.log(event.code)
 })
 
 //Блокировка персожана
@@ -61,25 +60,16 @@ function adddelAnimationSelect(nodein, selONF) {
   const findIdCard = document.querySelector('#' + nodein) //найти чилдрен  imgChamp и изменить ему прозрачность
   if (selONF == true) {
     findIdCard.querySelector('.imgChamp').style.opacity = '1'
+    //removeHover(nodein.replace('card_', ''))
     findIdCard.querySelector('.championName').style.color = 'blue'
     findIdCard.querySelector('.championName').style.textShadow =
       '4px 3px 0px #7A7A7A, 0px 9px 15px rgba(16,0,206,0.77);'
   } else {
     findIdCard.querySelector('.imgChamp').style.opacity = '0.7'
-    ///Тут доработать функцию возвращения hover
-    // var opacityReturn = findIdCard.querySelector('.imgChamp')
-    // opacityReturn.addEventListener('mouseover', function () {
-    //   opacityReturn.style.opacity = 1
-    // })
-    // opacityReturn.addEventListener('mouesout', function () {
-    //   opacityReturn.style.opacity = 0.7
-    // })
 
     findIdCard.querySelector('.championName').style.color = 'crimson'
     findIdCard.querySelector('.championName').style.textShadow = ''
   }
-
-  //championName сменить цвет и придать анимацию выбора взрыв или типа того
 }
 
 //Функция генерации № чемпиона
@@ -118,46 +108,4 @@ function setRandomsChampions() {
   })
 }
 
-/*
-//Переключение замка
-document.addEventListener('click', (event) => {
-  const type = event.target.dataset.type //Свойство опускаем в нижний регистр (тк оно всегда в верхнем)
-  if (type === 'lock') {
-    //Если кликнули по значку замка
-    const node =
-      event.target.tagName.toLowerCase() === 'i' //Если кликнули по символу замка то
-        ? event.target //
-        : event.target.children[0] //а если по фону замка то,то получаем первого ребенка из массива (сам символ значка)
-
-    node.classList.toggle('fa-lock-open') //переключить замок (смену класса)
-    node.classList.toggle('fa-lock')
-  } else if (type === 'copy') {
-    copyToClickboard(event.target.textContent) //Если нажали на
-  }
-})
-
-
-
-
-function updateColorsHash(colors = []) {
-  document.location.hash = colors
-    .map((col) => {
-      return col.toString().substring(1)
-    })
-    .join('-')
-}
-
-function getColorsfromHash() {
-  if (document.location.hash.length > 1) {
-    document.location.hash
-      .substring(1)
-      .split('-')
-      .map((color) => '#' + color)
-  }
-  return []
-}
-
-
-
-*/
 setRandomsChampions() //вызываем функцию создания рандомной тройки
