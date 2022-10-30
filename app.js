@@ -60,7 +60,6 @@ function adddelAnimationSelect(nodein, selONF) {
   const findIdCard = document.querySelector('#' + nodein) //найти чилдрен  imgChamp и изменить ему прозрачность
   if (selONF == true) {
     findIdCard.querySelector('.imgChamp').style.opacity = '1'
-    //removeHover(nodein.replace('card_', ''))
     findIdCard.querySelector('.championName').style.color = 'blue'
     findIdCard.querySelector('.championName').style.textShadow =
       '4px 3px 0px #7A7A7A, 0px 9px 15px rgba(16,0,206,0.77);'
@@ -83,8 +82,6 @@ function generateRndChampion() {
 
 //Установка сгенерированных чемпионов
 function setRandomsChampions() {
-  //const colors = isInitial ? getColorsfromHash() : []
-  //const test = isInitial ? console.log('вошли в цикл') : console.log('dsad')
   currentChamps = [-1, -1, -1] // выполняем сброс текущих
   //Далее надо заменить элементы массива что в массиве выбранных(setChamps) != -1
   setChamps.forEach((setCmp, index) => {
